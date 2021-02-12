@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="highlight/styles/default.css">
+    <script src="highlight/highlight.pack.js"></script>
+
+
+</head>
+
+<body>
+
+<div class="inputText">
+    <textarea id="inputText" rows="20" cols="50"></textarea>
+    <button id="run">Run</button>
+</div>
+
+<div class="column50"><pre><code id="start" class="json"></code></pre></div>
+<div class="column50"><pre><code id="end" class="json"></code></pre></div>
+
+</body>
+
+<script>
+    hljs.initHighlightingOnLoad();
+    function prettyFy(text) {
+        var objJson = JSON.parse(text);
+        var formattedText = JSON.stringify(objJson, null, 2);
+        return formattedText;
+    }
+
+    function callService(text) {
+       // aqui todo el codigo para llamar al servicio, devolver el response como texto
+        return text;
+    }
+
+    $('#run').click(function(){
+        $('#start').text(prettyFy($('#inputText').val()));
+        $('#end').text(prettyFy(callService($('#inputText').val())));
+        hljs.highlightBlock(document.getElementById("start"));
+        hljs.highlightBlock(document.getElementById("end"));
+    });
+
+</script>
+
+</html>
